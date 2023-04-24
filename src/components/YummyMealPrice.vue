@@ -1,17 +1,17 @@
 <template>
-  <p>{{ pricePretty }}</p>
+  <span>{{ pricePretty }}</span>
 </template>
 
 <script>
-import { computed } from 'vue';
+import { computed, inject } from 'vue';
 export default {
   props: {
-    currencySymbol:String,
     price: Number
   },
   setup(props) {
+    const currencySymbol = inject('currencySymbol')
     const pricePretty = computed(() => {
-      return `${props.currencySymbol}${props.price}`
+      return `${currencySymbol.value}${props.price}`
     })
 
     return { pricePretty}

@@ -1,36 +1,21 @@
 <template>
-  <div class="yummy">
-    <p>{{ name }}</p>
-    <YummyMealPrice :price="price" :currencySymbol="currencySymbol" />
-    <button @click="addToCart">Add to cart</button>
+  <div class="flex flex-col gap-2 border p-2 rounded shadow">
+    <p>{{ name }} <YummyMealPrice :price="price" /></p>
+    <button class="border rounded px-3 py-2" @click="addToCart">Add to cart</button>
   </div>
 </template>
 
-<script>
-import { computed } from 'vue';
+<script setup>
 import YummyMealPrice from './YummyMealPrice.vue';
-export default {
-  components: { YummyMealPrice },
-  props: {
-    name: String,
-    price: Number,
-    currencySymbol: String
-  },
-  setup(props, { emit }) {
-    const addToCart = () => emit("addToCart", props.name);
-    const pricePretty = computed(() => {
-      return `$${props.price}`;
-    });
-    return { addToCart, pricePretty };
-  },
-}
+
+const props = defineProps({
+  name: String,
+  price: Number,
+})
+const emit = defineEmits('addToCart')
+const addToCart = () => emit("addToCart", props.name);
 
 </script>
 
 <style scoped>
-.yummy {
-  display: flex;
-  gap: 8px;
-  margin: 4px;
-}
 </style>
