@@ -13,4 +13,6 @@ export default function useResource(resource) {
     item.value = await res.json()
   }
   return { items, item, fetchAll, fetchOne }
-}
+}   
+
+// ts
